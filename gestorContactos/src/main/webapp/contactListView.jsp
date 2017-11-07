@@ -26,7 +26,10 @@
 		</table>
 		<div class="bottom_links">
 			<a href="contactEditView.jsp" class="button">New contact</a>
+                        
+                        <a href="ContactMobileList" class="button">Mobile contact</a>
 		</div>
+                
 	</div>
 
 	<!-- footer -->
