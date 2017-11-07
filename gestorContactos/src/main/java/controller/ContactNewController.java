@@ -29,18 +29,13 @@ public class ContactNewController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		// TODO: Read request parameters
-                String name = request.getParameter("name");
-                String phone = request.getParameter("phone");
-                
-                System.out.println("Contacto nuevo: " + name + " - " + phone);
+		
 		
 		// TODO: Create contact in the repository
-                ContactRepository bd = ContactRepository.getInstance();
-                bd.addContact(name, phone);
+		
 
 		// TODO: Forward to contact list view
 		request.setAttribute("message", "Contact created successfully");
-                request.getRequestDispatcher("/").forward(request, response);
 		
 	}
 
