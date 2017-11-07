@@ -17,31 +17,43 @@ import model.repository.ContactRepository;
  * Servlet implementation class ContactNewController
  */
 public class ContactNewController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-	private static final Logger log = Logger.getLogger(ContactUpdateController.class.getName());
-	
+
+    private static final long serialVersionUID = 1L;
+
+    private static final Logger log = Logger.getLogger(ContactUpdateController.class.getName());
+
     public ContactNewController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		// TODO: Read request parameters
-		
-		
-		// TODO: Create contact in the repository
-		
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// TODO: Forward to contact list view
-		request.setAttribute("message", "Contact created successfully");
-		
-	}
+        // TODO: Read request parameters
+        String name = request.getParameter("name");
+        String phone = request.getParameter("phone");
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+        if (name == null || name.equals("") || phone == null || phone.equals("")) {
+            request.setAttribute("message", "Los datos introducidos no son validos");
+            request.getRequestDispatcher("/contactEditView.jsp").forward(request, response);
+
+        } else {
+            System.out.println("Contacto nuevo: " + name + " - " + phone);
+
+            // TODO: Create contact in the repository
+            ContactRepository bd = ContactRepository.getInstance();
+            bd.addContact(name, phone);
+
+            // TODO: Forward to contact list view
+            request.setAttribute("message", "Contact created successfully");
+            request.getRequestDispatcher("/").forward(request, response);
+        }
+
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
+    }
 
 }
